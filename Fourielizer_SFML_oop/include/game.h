@@ -14,16 +14,20 @@ private:
     sf::RenderWindow* window;
     sf::Event event;
     sf::VideoMode videoMode;
+    float rectHeight, rectWidth;
 
     //Game objects
-    sf::CircleShape primaryCircle;
-   // sf::Vertex line[] = { sf::Vertex(sf::Vector2f(2, 10)), sf::Vertex(sf::Vector2f(400, 100)) };
-    //sf::VertexArray line(sf::Triangles, 3);
+    sf::Font font;
+    sf::Text text;
+    sf::RectangleShape rect[4];
+
 
     //Private functions
     void initVariables();
     void initWindow();
     void initShape();
+    void initText();
+
 protected:
 
 public:
@@ -38,7 +42,6 @@ public:
     void pollEvents();
     void update();
     void render();
-    void draw();
 
 };
 

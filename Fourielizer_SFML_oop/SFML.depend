@@ -531,3 +531,21 @@
 1626506009 source:e:\suyog\cpp\sfml\src\game.cpp
 	"game.h"
 
+1628925254 source:e:\suyog\bct\bctsem3\oop\project\fourielizer\fourielizer_sfml_oop\main.cpp
+	"./include/Game.h"
+
+1628928959 e:\suyog\bct\bctsem3\oop\project\fourielizer\fourielizer_sfml_oop\include\game.h
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	<SFML/Window.hpp>
+	<SFML/Audio.hpp>
+	<iostream>
+
+1628991336 source:e:\suyog\bct\bctsem3\oop\project\fourielizer\fourielizer_sfml_oop\src\game.cpp
+	"game.h"
+
+1628991210 source:e:\suyog\bct\bctsem3\oop\project\fourielizer\fourielizer_sfml_oop\src\drawables.cpp
+	"Drawables.h"
+
+1628991141 e:\suyog\bct\bctsem3\oop\project\fourielizer\fourielizer_sfml_oop\include\drawables.h
+
