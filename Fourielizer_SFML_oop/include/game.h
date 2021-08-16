@@ -15,12 +15,14 @@ private:
     sf::Event event;
     sf::VideoMode videoMode;
     float rectHeight, rectWidth;
+    float paddingx, paddingy;
 
     //Game objects
     sf::Font font;
     sf::Text text;
     sf::RectangleShape rect[4];
-
+    sf::Font fontInRect;
+    sf::Text textInRect[4];
 
     //Private functions
     void initVariables();

@@ -42,8 +42,10 @@
 			<Add directory="C:/SFML-2.5.1/lib" />
 		</Linker>
 		<Unit filename="clock.cpp" />
+		<Unit filename="include/Drawables.h" />
 		<Unit filename="include/game.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Drawables.cpp" />
 		<Unit filename="src/game.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

@@ -3,8 +3,10 @@
 //Private functions
 void Game::initVariables(){
     this->window = nullptr;
-    rectHeight = 75.f;
-    rectWidth = 150.f;
+    rectHeight = 150.f;
+    rectWidth = 400.f;
+    paddingx = 45.f;
+    paddingy = 50.f;
 }
 void Game::initWindow(){
     this->videoMode.height = 768;
@@ -20,27 +22,27 @@ void Game::initShape(){
         rect[i].setFillColor(sf::Color::Cyan);
     }
     rect[0].setPosition(50, 300);
-    rect[1].setPosition(1166, 300);
-    rect[2].setPosition(50, 450);
-    rect[3].setPosition(1166, 450);
+    rect[1].setPosition(910, 300);
+    rect[2].setPosition(50, 550);
+    rect[3].setPosition(910, 550);
 
 }
 void Game::initText(){
     //Setting the text object and font
-    sf::Font font;
     try{
         if (!(font.loadFromFile("arial.ttf"))) throw "Bad Font Load\n";
+        text.setFont(font);
+        /*for (int i = 0; i < 4 ; ++i)
+            textInRect[i].setFont(font);*/
+        fontInRect.loadFromFile("arial_bold.TTF");
+        for (int i = 0; i<4 ; ++i)
+            textInRect[i].setFont(fontInRect);
+
+        std::cout<<"Font loaded successfully"<<std::endl;
     }
     catch(const char* err){
         std::cerr<< "[ERROR]: " << err;
     }
-    sf::Text text;
-    text.setFont(font);
-    text.setString("WELCOME TO FOURIELIZER");
-    text.setFillColor(sf::Color::Black);
-    text.setStyle(sf::Text::Bold);
-    text.setCharacterSize(25);
-    text.setPosition(sf::Vector2f(200, 50));
 }
 
 
@@ -94,18 +96,43 @@ void Game::pollEvents(){
 void Game::update(){ //This is where all the logic behind the stuff is
     this->pollEvents();
 
-    if ( sf::Mouse::getPosition(*this->window).x > rect[0].getPosition().x && sf::Mouse::getPosition(*this->window).x < (rect[0].getPosition().x + 150) && sf::Mouse::getPosition(*this->window).y > rect[0].getPosition().y && (sf::Mouse::getPosition(*this->window).y < rect[0].getPosition().y + 75) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left ){
+    //updating the text
+    text.setString("WELCOME TO FOURIELIZER");
+    text.setFillColor(sf::Color::White);
+    text.setStyle(sf::Text::Bold);
+    text.setCharacterSize(50);
+    text.setPosition(sf::Vector2f(310.f, 50.f));
+
+    textInRect[0].setString("  Square Wave");
+    textInRect[1].setString("Triangular Wave");
+    textInRect[2].setString("Saw-tooth Wave");
+    textInRect[3].setString("Music Visualizer");
+
+    for (int i = 0 ; i<3 ; ++i){
+        textInRect[i].setFillColor(sf::Color::Black);
+        textInRect[i].setCharacterSize(40);
+        textInRect[i].setPosition(sf::Vector2f(rect[i].getPosition().x + paddingx, rect[i].getPosition().y + paddingy));
+    }
+        textInRect[3].setFillColor(sf::Color::Black);
+        textInRect[3].setCharacterSize(40);
+        textInRect[3].setPosition(sf::Vector2f(rect[3].getPosition().x + paddingx, rect[3].getPosition().y + paddingy));
+
+
+
+    //tracking the mouse clicks
+    if ( sf::Mouse::getPosition(*this->window).x > rect[0].getPosition().x && sf::Mouse::getPosition(*this->window).x < (rect[0].getPosition().x + rectWidth) && sf::Mouse::getPosition(*this->window).y > rect[0].getPosition().y && (sf::Mouse::getPosition(*this->window).y < rect[0].getPosition().y + rectHeight) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left ){
         std::cout<<"Mouse Clicked on 1st rect\n";
     }
-    if ( sf::Mouse::getPosition(*this->window).x > rect[1].getPosition().x && sf::Mouse::getPosition(*this->window).x < (rect[1].getPosition().x + 150) && sf::Mouse::getPosition(*this->window).y > rect[1].getPosition().y && (sf::Mouse::getPosition(*this->window).y < rect[1].getPosition().y + 75) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left ){
+    if ( sf::Mouse::getPosition(*this->window).x > rect[1].getPosition().x && sf::Mouse::getPosition(*this->window).x < (rect[1].getPosition().x + rectWidth) && sf::Mouse::getPosition(*this->window).y > rect[1].getPosition().y && (sf::Mouse::getPosition(*this->window).y < rect[1].getPosition().y + rectHeight) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left ){
         std::cout<<"Mouse Clicked on 2nd rect\n";
     }
-    if ( sf::Mouse::getPosition(*this->window).x > rect[2].getPosition().x && sf::Mouse::getPosition(*this->window).x < (rect[2].getPosition().x + 150) && sf::Mouse::getPosition(*this->window).y > rect[2].getPosition().y && (sf::Mouse::getPosition(*this->window).y < rect[2].getPosition().y + 75) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left ){
+    if ( sf::Mouse::getPosition(*this->window).x > rect[2].getPosition().x && sf::Mouse::getPosition(*this->window).x < (rect[2].getPosition().x + rectWidth) && sf::Mouse::getPosition(*this->window).y > rect[2].getPosition().y && (sf::Mouse::getPosition(*this->window).y < rect[2].getPosition().y + rectHeight) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left ){
         std::cout<<"Mouse Clicked on 3rd rect\n";
     }
-    if ( sf::Mouse::getPosition(*this->window).x > rect[3].getPosition().x && sf::Mouse::getPosition(*this->window).x < (rect[3].getPosition().x + 150) && sf::Mouse::getPosition(*this->window).y > rect[3].getPosition().y && (sf::Mouse::getPosition(*this->window).y < rect[3].getPosition().y + 75) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left ){
+    if ( sf::Mouse::getPosition(*this->window).x > rect[3].getPosition().x && sf::Mouse::getPosition(*this->window).x < (rect[3].getPosition().x + rectWidth) && sf::Mouse::getPosition(*this->window).y > rect[3].getPosition().y && (sf::Mouse::getPosition(*this->window).y < rect[3].getPosition().y + rectHeight) && event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left ){
         std::cout<<"Mouse Clicked on 4th rect\n";
     }
+
 
     //sf::Mouse::getPosition(*this->window).y//relative to the screen
 
@@ -119,10 +146,14 @@ void Game::render(){ //This is where all the display stuff happens
     this->window->clear();
 
     //Draw game objects
-    this->window->draw(text);
+
     for (int i = 0 ; i<4 ; ++i){
         this->window->draw(rect[i]);
+        this->window->draw(textInRect[i]);
     }
+
+    this->window->draw(text);
+
 
     this->window->display(); //Tell the app that it is done drawing
 }
